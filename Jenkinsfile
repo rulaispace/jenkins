@@ -5,30 +5,15 @@ pipeline {
   stages {
   	stage('Build') {
   		steps {
-  			echo 'Building..'
+  			sh 'make'
+        archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
   		}
   	}
-  	stage('Test') {
-  		steps {
-  			echo 'Testing..'
-  		}
-  	}
-  	stage('Deploy') {
-  		steps {
-  			echo 'Deploying....'
-  		}
-  	}
-  }
 }
 
 node {
 	stage('Build') {
-		echo 'Building....'
-	}
-	stage('Test') {
-		echo 'Testing....'
-	}
-	stage('Deploy') {
-		echo 'Deploying....'
+		sh 'make'
+    archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
 	}
 }
